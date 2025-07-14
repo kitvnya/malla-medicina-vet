@@ -1,0 +1,69 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #e0f7fa;
+  color: #004d40;
+  margin: 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.semester {
+  margin-bottom: 30px;
+}
+
+.semester h2 {
+  margin-bottom: 10px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+}
+
+.ramo {
+  padding: 15px;
+  border-radius: 8px;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: bold;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.locked {
+  background: #b0bec5;
+  cursor: default;
+}
+
+.avail {
+  background: #00bcd4;
+}
+
+.avail:hover {
+  background: #00acc1;
+}
+
+.done {
+  background: #2ec4b6;
+}
+
+#reset {
+  display: block;
+  margin: 30px auto;
+  padding: 10px 20px;
+  background: #00acc1;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#reset:hover {
+  background: #008b9a;
+}
