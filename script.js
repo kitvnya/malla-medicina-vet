@@ -17,7 +17,6 @@ const ramos = [
 const container = document.getElementById('malla');
 const maxSem = Math.max(...ramos.map(r => r.sem));
 
-// Crear estructura por semestre
 for (let s = 1; s <= maxSem; s++) {
   const divS = document.createElement('div');
   divS.classList.add('semester');
@@ -25,7 +24,6 @@ for (let s = 1; s <= maxSem; s++) {
   container.appendChild(divS);
 }
 
-// Crear botones de ramos
 ramos.forEach(r => {
   const btn = document.createElement('div');
   btn.id = r.id;
@@ -53,7 +51,6 @@ function desbloquear(id) {
   });
 }
 
-// Reset
 document.getElementById('reset').addEventListener('click', () => {
   ramos.forEach(r => {
     const el = document.getElementById(r.id);
