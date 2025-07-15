@@ -1,61 +1,48 @@
-const ramos = [
-  { id: 'BIOL034', name: 'Biología Celular', sem: 1, prereq: [] },
-  { id: 'BIOL035', name: 'Lab. Biocelular', sem: 1, prereq: [] },
-  { id: 'QUI002', name: 'Química', sem: 1, prereq: [] },
-  { id: 'FMMP003', name: 'Matemática', sem: 1, prereq: [] },
-  { id: 'DEBD221', name: 'Zoología', sem: 1, prereq: [] },
-  { id: 'ING119', name: 'Inglés I', sem: 1, prereq: [] },
-  { id: 'MVET611', name: 'Intro. Med. Vet', sem: 1, prereq: [] },
-
-  { id: 'BIOL166', name: 'Bioquímica', sem: 2, prereq: ['BIOL034', 'BIOL035', 'QUI002'] },
-  { id: 'MVET621', name: 'ADO I', sem: 2, prereq: ['BIOL034', 'BIOL035'] },
-  { id: 'MVET622', name: 'Cuerpo Animal I', sem: 2, prereq: ['BIOL034', 'BIOL035', 'DEBD221'] },
-  { id: 'ING129', name: 'Inglés II', sem: 2, prereq: ['ING119'] },
-  { id: 'CEGHC11', name: 'Hab. Comunicativas', sem: 2, prereq: [] },
-];
-
-const container = document.getElementById('malla');
-const maxSem = Math.max(...ramos.map(r => r.sem));
-
-for (let s = 1; s <= maxSem; s++) {
-  const divS = document.createElement('div');
-  divS.classList.add('semester');
-  divS.innerHTML = `<h2>Semestre ${s}</h2><div class="grid" id="sem${s}"></div>`;
-  container.appendChild(divS);
+body {
+  font-family: Arial, sans-serif;
+  background-color: #e6f7f9;
+  color: #003c4d;
+  padding: 20px;
 }
 
-ramos.forEach(r => {
-  const btn = document.createElement('div');
-  btn.id = r.id;
-  btn.textContent = r.name;
-  btn.classList.add('ramo', r.prereq.length ? 'locked' : 'avail');
-  btn.addEventListener('click', () => onClick(r));
-  document.getElementById('sem' + r.sem).appendChild(btn);
-});
-
-function onClick(r) {
-  const el = document.getElementById(r.id);
-  if (el.classList.contains('avail')) {
-    el.classList.replace('avail', 'done');
-    desbloquear(r.id);
-  }
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #007c91;
 }
 
-function desbloquear(id) {
-  ramos.filter(r => r.prereq.includes(id)).forEach(r => {
-    const el = document.getElementById(r.id);
-    const ready = r.prereq.every(pr => document.getElementById(pr).classList.contains('done'));
-    if (ready && el.classList.contains('locked')) {
-      el.classList.replace('locked', 'avail');
-    }
-  });
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 10px;
+  max-width: 1600px;
+  margin: 0 auto;
 }
 
-document.getElementById('reset').addEventListener('click', () => {
-  ramos.forEach(r => {
-    const el = document.getElementById(r.id);
-    el.className = 'ramo';
-    if (r.prereq.length) el.classList.add('locked');
-    else el.classList.add('avail');
-  });
-});
+.curso {
+  background-color: #cfeef3;
+  border: 2px solid #007c91;
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  user-select: none;
+}
+
+.curso:hover {
+  background-color: #b5e8ee;
+  transform: scale(1.03);
+}
+
+.curso.aprobado {
+  background-color: #007c91;
+  color: white;
+  font-weight: bold;
+}
+
+.curso.bloqueado {
+  opacity: 0.5;
+  cursor: not-allowed;
+  border-style: dashed;
+}
